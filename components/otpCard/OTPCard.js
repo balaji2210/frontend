@@ -39,6 +39,11 @@ const OTPCard = () => {
       if (authResponse?.status === 200) {
         router?.push("/profile");
       }
+    } else {
+      toast?.error("Invalid OTP", {
+        autoClose: 2000,
+        theme: "dark",
+      });
     }
   };
 
