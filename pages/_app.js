@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }) {
   return (
     <Theme>
       <ToastContainer />
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </Theme>
   );
 }
