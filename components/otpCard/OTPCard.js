@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { Card, Typography } from "../utils";
 import {
@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 const OTPCard = () => {
   const router = useRouter();
 
+  const [phone, setPhone] = useState();
   const [otp, setOTP] = useState([]);
 
   const handleChange = (value) => {
@@ -26,8 +27,6 @@ const OTPCard = () => {
   };
 
   const handleVerify = async () => {
-    const phone =
-      typeof window !== "undefined" && localStorage?.getItem("phone");
     const response = await verifyOTP({
       phone: Number(phone),
       otp: Number(otp?.join("")),
@@ -63,6 +62,14 @@ const OTPCard = () => {
     }
   };
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const phoneNumber =
+        typeof window !== "undefined" && localStorage?.getItem("phone");
+      setPhone(phoneNumber);
+    }
+  }, []);
+
   return (
     <Wrapper>
       <Card>
@@ -87,7 +94,7 @@ const OTPCard = () => {
             fontWeight="semiBold"
             textColor="primary700"
           >
-            7013719855
+            {phone}
           </Typography>
         </TextContainer>
         <FormWrapper>
